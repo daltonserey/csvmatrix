@@ -16,4 +16,8 @@ test:
 	cd tests \
 	npm i csvmatrix \
 	node test-01.js
-    
+
+clean:
+	rm -rf build
+	rm -rf node_modules tests/node_modules
+	rm -rf tests/package-lock.json
