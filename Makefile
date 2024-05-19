@@ -13,8 +13,8 @@ upload:
 	cd $(SOURCE); npm publish; cd ..
 
 test:
-	cd tests \
-	npm i csvmatrix \
+	cd tests && \
+	npm i csvmatrix && \
 	node test-01.js
 
 clean:
