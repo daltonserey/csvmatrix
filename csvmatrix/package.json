@@ -1,3 +1,27 @@
 {
-    "type": "module"
+  "name": "csvmatrix",
+  "version": "0.1.0",
+  "description": "Manipulate CSV data and files as matrices",
+  "main": "csvmatrix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daltonserey/csvmatrix.git"
+  },
+  "keywords": [
+    "csv",
+    "matrix"
+  ],
+  "author": "Dalton Serey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daltonserey/csvmatrix/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/daltonserey/csvmatrix#readme"
 }
