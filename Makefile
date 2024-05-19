@@ -21,3 +21,4 @@ clean:
 	rm -rf build
 	rm -rf node_modules tests/node_modules
 	rm -rf tests/package-lock.json
+	git restore tests/package.json
