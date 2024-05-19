@@ -1,4 +1,4 @@
-import { CSVMatrix } from './csvmatrix.js';
+import { CSVMatrix } from 'csvmatrix';
 import assert from 'assert'
 
 // dados em formato csv usado para testes
