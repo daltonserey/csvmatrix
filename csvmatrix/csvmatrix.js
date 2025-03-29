@@ -38,7 +38,10 @@ export class CSVMatrix {
             this._lines.push(this[index] = line);
             this.col_names?.forEach((col_name, i) => {
                 // adiciona acesso pelo nome da coluna
-                Object.defineProperty(line, col_name, {value: line[i]});
+                Object.defineProperty(line, col_name, {
+                    configurable: true,
+                    value: line[i],
+                });
             });
         });
         this._sync_transpose();
