@@ -1,3 +1,6 @@
 {
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "csvmatrix": "^0.1.2"
+  }
 }

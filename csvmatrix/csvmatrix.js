@@ -11,7 +11,40 @@
 
 // Expressão regular para separar campos de uma linha CSV.
 const DEFAULT_DELIM = ',';
-const FIELD_REGEX = /(?:[^,"|]+|"[^"]*")+/g
+
+function parseLine(line_str, delim) {
+    const fields = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line_str.length; i++) {
+        const char = line_str[i];
+        
+        if (inQuotes) {
+            if (char === '"') {
+                if (line_str[i + 1] === '"') {
+                    current += '"';
+                    i++;
+                } else {
+                    inQuotes = false;
+                }
+            } else {
+                current += char;
+            }
+        } else {
+            if (char === '"') {
+                inQuotes = true;
+            } else if (char === delim) {
+                fields.push(current);
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+    }
+    fields.push(current);
+    return fields;
+}
 
 export class CSVMatrix {
     constructor(csv_text, opts) {
@@ -20,14 +53,19 @@ export class CSVMatrix {
         this.delim = opts?.delim || DEFAULT_DELIM;
         this.col_names = opts?.header ? text_lines.splice(0, 1)[0].split(this.delim) : null;
         text_lines.forEach((line_str, index) => {
-            let fields = line_str.match(FIELD_REGEX);
+            let fields = parseLine(line_str, this.delim);
             if (!fields) return;
             let line = fields.map(valor => {
+                let result;
                 if (valor[0] == '"' && valor[valor.length - 1] == '"') {
-                    return valor.substring(1, valor.length - 1).replaceAll('""', '"');
+                    result = valor.substring(1, valor.length - 1).replaceAll('""', '"');
                 } else {
-                    return valor;
+                    result = valor;
                 }
+                if (result === '') {
+                    return opts?.default ?? null;
+                }
+                return result;
             });
             // adiciona acesso pela chave de cada linha
             if (opts?.keys) {
